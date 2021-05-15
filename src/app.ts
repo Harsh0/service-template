@@ -3,8 +3,10 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
 import config from './config';
+import MainRouter from './routers/MainRouter';
 class Server {
     public app = express();
+    public router = MainRouter;
 }
 
 // initialize server app
@@ -21,7 +23,6 @@ server.app.use(
 );
 
 // Health check endpoint
-server.app.get('/', (req, res) => res.send('Welcome to Main Service'));
 server.app.get('/health', (req, res) => res.send('Healthy'));
 server.app.get('/host', (req, res) => res.send('HOSTNAME: ' + config.HOSTNAME));
 server.app.get('/commit', (req, res) =>
@@ -37,6 +38,8 @@ server.app.use(cookieParser());
 server.app.use(express.json());
 server.app.use(express.text({ type: 'text/*' }));
 server.app.use(express.urlencoded({ extended: false }));
+
+server.app.use(server.router);
 
 // make server app handle any error
 server.app.use(
