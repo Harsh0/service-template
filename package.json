@@ -1,0 +1,41 @@
+{
+    "name": "main-service",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start:nodemon": "nodemon src/index.ts",
+        "start": "APP_PORT=8080 npm run start:nodemon",
+        "start:debug": "DEBUG=true npm start",
+        "docker": "sed 's/localhost/host.docker.internal/g' ./var/.env > ./var/.local.env && NODE_ENV=local ./scripts/run.sh # Make sure to have .env file in ./var folder",
+        "build": "tsc",
+        "start:pm2": "pm2-runtime start ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Harsh0/service-template.git"
+    },
+    "keywords": [],
+    "author": "Harsh Singhal <harsh.singhal040@gmail.com> (https://harsh-singhal.medium.com)",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Harsh0/service-template/issues"
+    },
+    "homepage": "https://github.com/Harsh0/service-template",
+    "dependencies": {
+        "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "@types/cookie-parser": "^1.4.2",
+        "@types/cors": "^2.8.9",
+        "@types/express": "^4.17.9",
+        "@types/qs": "^6.9.4",
+        "nodemon": "^2.0.6",
+        "ts-node": "^9.1.1",
+        "typescript": "^4.1.3"
+    }
+}
