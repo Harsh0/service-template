@@ -1,0 +1,11 @@
+paths:
+    /:
+        get:
+            tags:
+                - Main Handlers
+            summary: Main Handler
+            operationId: getWelcomeMessage
+            description: This Api returns welcome message
+            responses:
+                '200':
+                    description: Return Welcome Message
