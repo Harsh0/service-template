@@ -23,8 +23,13 @@ const config = {
     GITHUB_COMMIT_SHA: process.env.GITHUB_COMMIT_SHA || '',
     GITHUB_HOMEPAGE_URL: process.env.npm_package_homepage || '',
     /**
+     * All default configs goes here
+     */
+    ACCESS_TOKEN_VALIDITY_SECONDS: 1800, // 30 minutes
+    /**
      * All Secret config goes here
      */
+    JWT_SECRET: process.env.JWT_SECRET || 'sssssshhhh',
     MYSQL_DB_HOST: process.env.MYSQL_DB_HOST,
     MYSQL_DB_PORT: Number(process.env.MYSQL_DB_PORT),
     MYSQL_DB_NAME: process.env.MYSQL_DB_NAME,

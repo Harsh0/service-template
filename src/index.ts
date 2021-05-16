@@ -18,6 +18,7 @@ createConnection({
     entities: [__dirname + '/entities/*'],
     migrations: [__dirname + '/migrations/*'],
     subscribers: [__dirname + '/subscribers/*'],
+    entityPrefix: 'Table', // TODO: remove this, if you don't want any prefix in database tables
     synchronize: !config.IS_PRODUCTION,
     logging: false,
     namingStrategy: new SnakeNamingStrategy(),

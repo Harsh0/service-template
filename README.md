@@ -9,6 +9,7 @@
 ### Add local .env file in {root}/var folder
 
 ```conf
+JWT_SECRET=$JWT_SECRET
 MYSQL_DB_HOST=$MYSQL_DB_HOST
 MYSQL_DB_PORT=$MYSQL_DB_PORT
 MYSQL_DB_NAME=$MYSQL_DB_NAME
@@ -39,6 +40,10 @@ Open http://localhost:8000 in your browser
 `npm run docker`
 
 Open http://localhost:8080 in your browser to test
+
+## Access API documentation
+
+Open http://localhost:8080/api-docs in browser to see api documentation
 
 ## Linting your code
 

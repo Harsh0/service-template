@@ -1,0 +1,111 @@
+paths:
+    /user/signup:
+        post:
+            tags:
+                - User Authentication
+            summary: signup for user
+            operationId: signup
+            description: This signup the user and return tokens to authenticate apis
+            responses:
+                '200':
+                    $ref: '#/components/responses/UserAuthResponse'
+            requestBody:
+                $ref: '#/components/requestBodies/UserAuthBody'
+    /user/login:
+        post:
+            tags:
+                - User Authentication
+            summary: login for user
+            operationId: login
+            description: This login the user and return tokens to authenticate apis
+            responses:
+                '200':
+                    $ref: '#/components/responses/UserAuthResponse'
+            requestBody:
+                $ref: '#/components/requestBodies/UserAuthBody'
+    /user/get_access_token:
+        post:
+            tags:
+                - User Authentication
+            security:
+                - bearerAuth: []
+            summary: get new accessToken if it is expired
+            operationId: getNewAccessToken
+            description: This API verify the expired accessToken and validate refreshToken and return new accessToken
+            responses:
+                '200':
+                    $ref: '#/components/responses/UserAuthResponse'
+                '401':
+                    $ref: '#/components/responses/UnauthorizedError'
+            requestBody:
+                $ref: '#/components/requestBodies/RefreshTokenGrantBody'
+components:
+    requestBodies:
+        UserAuthBody:
+            description: A JSON object containing username and password
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/UserAuth'
+        RefreshTokenGrantBody:
+            description: A JSON object containing refreshToken and grantType
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/RefreshToken'
+    responses:
+        UserAuthResponse:
+            description: Access token and Refresh Token
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/UserAuthTokens'
+        UnauthorizedError:
+            description: Access token is missing or invalid or expired.
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/AccessTokenNotValidError'
+    schemas:
+        UserAuth:
+            type: object
+            properties:
+                username:
+                    type: string
+                password:
+                    type: string
+            example:
+                username: 'harsh'
+                password: 'my_strong_password'
+        UserAuthTokens:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+                refreshToken:
+                    type: string
+            example:
+                accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcnNoIiwiaWF0IjoxNjIxMTY5NzAwLCJleHAiOjE2MjExNzE1MDB9.Lk9bSn6_3FWrzYR_hDIABQX4CDdOVMIEruEo5Rr99MM'
+                refreshToken: '709150db409013cdd7b5e29160b473ed0144caf0f01d4d109b27f4ffde0f9338'
+        RefreshToken:
+            type: object
+            properties:
+                grantType:
+                    type: string
+                refreshToken:
+                    type: string
+            example:
+                grantType: 'refreshToken'
+                refreshToken: '709150db409013cdd7b5e29160b473ed0144caf0f01d4d109b27f4ffde0f9338'
+        AccessTokenNotValidError:
+            type: object
+            properties:
+                status:
+                    type: string
+                message:
+                    type: string
+            example:
+                status: 'error'
+                message: 'Access token is missing or invalid or expired'

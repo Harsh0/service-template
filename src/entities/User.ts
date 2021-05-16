@@ -5,15 +5,21 @@ import {
     UpdateDateColumn,
     PrimaryColumn,
     Column,
+    Index,
 } from 'typeorm';
 
-@Entity('Test')
-export class Test extends BaseEntity {
+@Entity('User')
+export class User extends BaseEntity {
     @PrimaryColumn({ length: 40 })
     username: string;
 
     @Column({ nullable: false })
     password: string;
+
+    @Index('refresh_token', { unique: true })
+    @Column({ nullable: false })
+    refreshToken: string;
+
     /**
      * DB insert time.
      */

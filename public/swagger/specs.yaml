@@ -1,3 +1,5 @@
 tags:
     - name: Main Handlers
       description: Main Routes
+    - name: User Authentication
+      description: User Authentication related routes
