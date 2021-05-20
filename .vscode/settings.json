@@ -7,5 +7,8 @@
     "prettier.arrowParens": "avoid",
     "html.format.unformattedContentDelimiter": "",
     "diffEditor.ignoreTrimWhitespace": false,
-    "prettier.tabWidth": 4
+    "prettier.tabWidth": 4,
+    "jshint.options": {
+        "esversion": 9
+    }
 }
